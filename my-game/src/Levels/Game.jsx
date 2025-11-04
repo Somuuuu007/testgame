@@ -36,7 +36,7 @@ const Game = () => {
         height: GAME_HEIGHT,
         parent: "phaser-container",
         scale: {
-          mode: Phaser.Scale.FIT,
+          mode: Phaser.Scale.NONE,
           autoCenter: Phaser.Scale.CENTER_VERTICALLY,
         },
         physics: {
