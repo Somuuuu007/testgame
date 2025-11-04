@@ -28,7 +28,7 @@ export class Level6Scene extends BaseScene {
 
     // Make door visible first - position it on screen
     this.door.x = 1350;
-    this.door.y = GAME_HEIGHT - 605 ; // Position on top of the last step
+    this.door.y = GAME_HEIGHT - 610 ; // Position on top of the last step
 
     // Create spike graphics for top boundary (death zone)
     this.spikes = this.add.graphics();
