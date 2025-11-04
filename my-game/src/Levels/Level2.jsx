@@ -11,7 +11,7 @@ export class Level2Scene extends BaseScene {
     this.groundPlatformWidth = 200; // Much taller ground platform
     this.platformColor = 0x212121;
     this.levelWidth = GAME_WIDTH; // Single screen width like Level 1
-    this.doorX = 1380; // Door on the last step
+    this.doorX = 1300; // Door on the last step
 
   }
 
@@ -28,7 +28,7 @@ export class Level2Scene extends BaseScene {
 
     // Make door visible first - position it on screen
     this.door.x = 1300;
-    this.door.y = GAME_HEIGHT - 102;
+    this.door.y = GAME_HEIGHT - 120;
   }
 
   createPlatforms() {

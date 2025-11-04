@@ -28,7 +28,7 @@ export class Level3Scene extends BaseScene {
 
     // Make door visible first - position it on screen
     this.door.x = 1300;
-    this.door.y = GAME_HEIGHT - 102;
+    this.door.y = GAME_HEIGHT - 132;
   }
 
   createPlatforms() {
