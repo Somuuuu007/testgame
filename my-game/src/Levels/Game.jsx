@@ -37,7 +37,7 @@ const Game = () => {
         parent: "phaser-container",
         scale: {
           mode: Phaser.Scale.NONE,
-          autoCenter: Phaser.Scale.CENTER_VERTICALLY,
+          autoCenter: Phaser.Scale.CENTER_BOTH,
         },
         physics: {
           default: "arcade",
