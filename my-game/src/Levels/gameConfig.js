@@ -1,6 +1,6 @@
 // Fixed design dimensions - based on your development device
 // All levels should be designed with these dimensions in mind
-export const GAME_WIDTH = 1532;  // Design width - adjust to match your device
+export const GAME_WIDTH = 1530;  // Design width - adjust to match your device
 export const GAME_HEIGHT = 740; // Design height - adjust to match your device
 
 // Export as default config object
