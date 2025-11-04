@@ -32,7 +32,7 @@ const Game = () => {
 
       const config = {
         type: Phaser.AUTO,
-        width: GAME_WIDTH,
+        width: GAME_WIDTH, // Dynamic width from gameConfig
         height: GAME_HEIGHT,
         parent: "phaser-container",
         scale: {

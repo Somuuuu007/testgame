@@ -1,7 +1,8 @@
-// Fixed design dimensions - based on your development device
-// All levels should be designed with these dimensions in mind
-export const GAME_WIDTH = 1530;  // Design width - adjust to match your device
-export const GAME_HEIGHT = 740; // Design height - adjust to match your device
+// Game dimensions
+// Width is now dynamic based on device screen
+// Height is fixed to maintain consistent vertical gameplay
+export const GAME_WIDTH = window.innerWidth;  // Dynamic width based on device screen
+export const GAME_HEIGHT = 740; // Fixed height - all levels designed for this height
 
 // Export as default config object
 export const gameConfig = {
