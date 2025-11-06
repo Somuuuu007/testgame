@@ -47,14 +47,14 @@ export class Level2Scene extends BaseScene {
     this.createPlatform(this.step1X, 500, 200, GAME_HEIGHT - 150);
 
     // Step 2 - Disappearing step (trap)
-    this.disappearingStep = this.add.rectangle(this.step2X, 600, 200, GAME_HEIGHT - 120, 0x212121);
+    this.disappearingStep = this.add.rectangle(this.step2X, 600, 200, GAME_HEIGHT - 100, 0x212121);
     this.physics.add.existing(this.disappearingStep, true);
     this.platforms.add(this.disappearingStep);
 
-    this.createPlatform(this.step3X, 700, 200, GAME_HEIGHT - 90);
-    this.createPlatform(this.step4X, 800, 200, GAME_HEIGHT - 60);
-    this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT - 30);
-    this.createPlatform(this.step6X, 1000, 200, GAME_HEIGHT - 0);
+    this.createPlatform(this.step3X, 700, 200, GAME_HEIGHT - 60);
+    this.createPlatform(this.step4X, 800, 200, GAME_HEIGHT - 30);
+    this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT - 0);
+    this.createPlatform(this.step6X, 1000, 200, GAME_HEIGHT + 30);
 
     // Track if step has been touched
     this.stepTouched = false;
