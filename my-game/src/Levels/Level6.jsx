@@ -115,8 +115,11 @@ export class Level6Scene extends BaseScene {
     this.movingSteps = [this.step1, this.step2, this.step3, this.step4, this.step5];
   }
 
-  update(time, delta) {  
-     // Override jump power for this level
+  update(time, delta) {
+    // Delta time in seconds for frame-rate independent movement
+    const deltaSeconds = delta / 1000;
+
+    // Override jump power for this level
     if (!this.levelComplete) {
       const speed = 250;
       const jumpPower = -430; // Increased jump power for this level
@@ -210,8 +213,9 @@ export class Level6Scene extends BaseScene {
     this.movingSteps.forEach((step) => {
       if (step.moving) {
         // Frame-rate independent step movement
-        // Keep original tested speed: 2 pixels per frame at 120fps
-        const stepSpeed = 2;
+        // Original speed: 2 pixels per frame at 120fps = 240 pixels per second
+        const stepSpeedPerSecond = 210;
+        const stepSpeed = stepSpeedPerSecond * deltaSeconds;
 
         // Update step position
         step.y -= stepSpeed;
