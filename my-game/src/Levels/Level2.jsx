@@ -34,14 +34,16 @@ export class Level2Scene extends BaseScene {
     // Adjust player spawn position for the taller ground
     this.player.y = GAME_HEIGHT - 700;
 
-    // Make door visible first - position it on screen (dynamic position)
+    // Position door dynamically based on calculated doorY (now door exists)
     this.door.x = this.doorX;
-    this.door.y = GAME_HEIGHT - 120;
+    this.door.y = this.doorY; // doorY already calculated to place door on platform top
   }
 
   createPlatforms() {
     // Create individual steps with custom properties
-    // Original pattern: Y increases by 100, heights use GAME_HEIGHT - value
+    // Store step 6 details for door positioning
+    const step6Y = 1000;
+    const step6Height = GAME_HEIGHT + 50;
 
     // Step 1
     this.createPlatform(this.step1X, 500, 200, GAME_HEIGHT - 150);
@@ -54,7 +56,12 @@ export class Level2Scene extends BaseScene {
     this.createPlatform(this.step3X, 700, 200, GAME_HEIGHT - 60);
     this.createPlatform(this.step4X, 800, 200, GAME_HEIGHT - 20);
     this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT + 20);
-    this.createPlatform(this.step6X, 1000, 200, GAME_HEIGHT + 50);
+    this.createPlatform(this.step6X, step6Y, 200, step6Height);
+
+    // Simply place door at last platform's top
+    // Platform center Y = step6Y, height = step6Height
+    // Top of platform = center - (height / 2)
+    this.doorY = step6Y - (step6Height / 2);
 
     // Track if step has been touched
     this.stepTouched = false;
