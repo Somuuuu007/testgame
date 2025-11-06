@@ -96,9 +96,12 @@ export class Level5Scene extends BaseScene {
     }
   }
 
-  update() {
+  update(time, delta) {
     if (!this.levelComplete) {
       const speed = 300;
+
+      // Delta time in seconds (delta is in milliseconds, so divide by 1000)
+      const deltaSeconds = delta / 1000;
 
       this.isOnGround = this.player.body.touching.down || this.player.body.blocked.down;
 
@@ -200,9 +203,10 @@ export class Level5Scene extends BaseScene {
 
       // Move spikes toward center when game flips
       if (this.spikesMoving) {
-        // Dynamic spike speed based on screen width (percentage-based)
-        // For reference device (1530px), speed was 3, so ~0.2% of width per frame
-        const spikeSpeed = GAME_WIDTH * 0.002;
+        // Increased speed to match original - testing with higher value
+        // If 180 was too slow, try 360 (double)
+        const spikeSpeedPerSecond = 370; // pixels per second
+        const spikeSpeed = spikeSpeedPerSecond * deltaSeconds;
 
         // Move left spikes to the right
         this.leftSpikeX += spikeSpeed;
