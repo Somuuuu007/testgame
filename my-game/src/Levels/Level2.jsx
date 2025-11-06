@@ -52,9 +52,9 @@ export class Level2Scene extends BaseScene {
     this.platforms.add(this.disappearingStep);
 
     this.createPlatform(this.step3X, 700, 200, GAME_HEIGHT - 60);
-    this.createPlatform(this.step4X, 800, 200, GAME_HEIGHT - 30);
-    this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT - 0);
-    this.createPlatform(this.step6X, 1000, 200, GAME_HEIGHT + 30);
+    this.createPlatform(this.step4X, 800, 200, GAME_HEIGHT - 20);
+    this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT + 20);
+    this.createPlatform(this.step6X, 1000, 200, GAME_HEIGHT + 50);
 
     // Track if step has been touched
     this.stepTouched = false;
