@@ -47,7 +47,7 @@ const Game = () => {
           },
         },
         scene: [
-          Level2Scene
+          Level6Scene
         ],
       };
 
