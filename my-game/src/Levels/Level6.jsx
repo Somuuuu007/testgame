@@ -27,7 +27,7 @@ export class Level6Scene extends BaseScene {
     this.player.y = GAME_HEIGHT - 250;
 
     // Make door visible first - position it dynamically on top of last platform
-    this.door.x = 1400; // Same X as last platform
+    this.door.x = 1350; // Same X as last platform
     this.door.y = this.doorY; // Calculated in createPlatforms
 
     // Create spike graphics for top boundary (death zone)
