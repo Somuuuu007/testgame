@@ -7,8 +7,11 @@ export class Level2Scene extends BaseScene {
   constructor() {
     super("Level2");
     this.backgroundKey = "background2";
-    this.groundPlatformHeight = 600; // Much taller ground platform
-    this.groundPlatformWidth = 200; // Much taller ground platform
+    // Dynamic ground platform dimensions based on screen size
+    // For reference: 600 height on 740px screen = ~81% of height
+    // For reference: 200 width on 1530px screen = ~13% of width
+    this.groundPlatformHeight = GAME_HEIGHT * 0.81; // ~81% of screen height
+    this.groundPlatformWidth = GAME_WIDTH * 0.13;   // ~13% of screen width
     this.platformColor = 0x212121;
     this.levelWidth = GAME_WIDTH; // Single screen width like Level 1
 
