@@ -11,7 +11,15 @@ export class Level3Scene extends BaseScene {
     this.groundPlatformWidth = 200; // Much taller ground platform
     this.platformColor = 0x212121;
     this.levelWidth = GAME_WIDTH; // Single screen width like Level 1
-    this.doorX = 1300; // Door on the last step
+
+    // Dynamic positions based on screen width (using percentages)
+    this.step1X = GAME_WIDTH * 0.19;  // ~19% from left
+    this.step2X = GAME_WIDTH * 0.32;  // ~32% from left
+    this.step3X = GAME_WIDTH * 0.45;  // ~45% from left
+    this.step4X = GAME_WIDTH * 0.58;  // ~58% from left
+    this.step5X = GAME_WIDTH * 0.71;  // ~71% from left
+    this.step6X = GAME_WIDTH * 0.84;  // ~84% from left
+    this.doorX = GAME_WIDTH * 0.84;   // Door on the last step
 
   }
 
@@ -26,31 +34,39 @@ export class Level3Scene extends BaseScene {
     // Adjust player spawn position for the taller ground
     this.player.y = GAME_HEIGHT - 700;
 
-    // Make door visible first - position it on screen
-    this.door.x = 1300;
-    this.door.y = GAME_HEIGHT - 132;
+    // Position door dynamically based on calculated doorY (now door exists)
+    this.door.x = this.doorX;
+    this.door.y = this.doorY; // doorY calculated in createPlatforms
   }
 
   createPlatforms() {
     // Create individual steps with custom properties
+    // Same heights as Level 2 - Store step 6 details for door positioning
+    const step6Y = 1000;
+    const step6Height = GAME_HEIGHT + 100;
 
     // Step 1
-    this.createPlatform(280, 500, 200, GAME_HEIGHT - 150);
+    this.createPlatform(this.step1X, 500, 200, GAME_HEIGHT - 150);
 
     // Step 2 - Disappearing step (trap)
-    this.disappearingStep = this.add.rectangle(480, 600, 200, GAME_HEIGHT - 120, 0x212121);
+    this.disappearingStep = this.add.rectangle(this.step2X, 600, 200, GAME_HEIGHT - 100, 0x212121);
     this.physics.add.existing(this.disappearingStep, true);
     this.platforms.add(this.disappearingStep);
 
-    this.createPlatform(680, 700, 200, GAME_HEIGHT - 90);
+    this.createPlatform(this.step3X, 700, 200, GAME_HEIGHT - 50);
 
     // Step 4 - Second disappearing step (trap)
-    this.disappearingStep2 = this.add.rectangle(880, 800, 200, GAME_HEIGHT - 60, 0x212121);
+    this.disappearingStep2 = this.add.rectangle(this.step4X, 800, 200, GAME_HEIGHT - 0, 0x212121);
     this.physics.add.existing(this.disappearingStep2, true);
     this.platforms.add(this.disappearingStep2);
 
-    this.createPlatform(1080, 900, 200, GAME_HEIGHT - 30);
-    this.createPlatform(1280, 1000, 200, GAME_HEIGHT - 0);
+    this.createPlatform(this.step5X, 900, 200, GAME_HEIGHT + 50);
+    this.createPlatform(this.step6X, step6Y, 200, step6Height);
+
+    // Simply place door at last platform's top
+    // Platform center Y = step6Y, height = step6Height
+    // Top of platform = center - (height / 2)
+    this.doorY = step6Y - (step6Height / 2);
 
     // Track if steps have been touched
     this.stepTouched = false;
@@ -138,9 +154,16 @@ export class Level3Scene extends BaseScene {
       if (Phaser.Geom.Intersects.RectangleToRectangle(playerBounds, stepBounds)) {
         this.stepTouched = true;
 
-        // Remove from platforms group and destroy
-        this.platforms.remove(this.disappearingStep);
+        // IMMEDIATELY remove from platforms group to stop collision
+        this.platforms.remove(this.disappearingStep, true, true);
+
+        // Destroy the platform instantly
         this.disappearingStep.destroy();
+        this.disappearingStep = null;
+
+        // Force player to fall immediately
+        this.player.setVelocityY(200);
+        this.player.body.checkCollision.up = false;
       }
     }
 
@@ -153,9 +176,16 @@ export class Level3Scene extends BaseScene {
       if (Phaser.Geom.Intersects.RectangleToRectangle(playerBounds, stepBounds)) {
         this.step2Touched = true;
 
-        // Remove from platforms group and destroy
-        this.platforms.remove(this.disappearingStep2);
+        // IMMEDIATELY remove from platforms group to stop collision
+        this.platforms.remove(this.disappearingStep2, true, true);
+
+        // Destroy the platform instantly
         this.disappearingStep2.destroy();
+        this.disappearingStep2 = null;
+
+        // Force player to fall immediately
+        this.player.setVelocityY(200);
+        this.player.body.checkCollision.up = false;
       }
     }
 
@@ -192,7 +222,7 @@ const Level3 = () => {
         height: GAME_HEIGHT,
         parent: "phaser-container",
         scale: {
-          mode: Phaser.Scale.FIT,
+          mode: Phaser.Scale.NONE,
           autoCenter: Phaser.Scale.CENTER_BOTH,
         },
         physics: {
