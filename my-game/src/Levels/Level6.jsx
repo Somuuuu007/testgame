@@ -26,9 +26,9 @@ export class Level6Scene extends BaseScene {
     // Adjust player spawn position - lower on the screen to avoid top spikes
     this.player.y = GAME_HEIGHT - 250;
 
-    // Make door visible first - position it on screen
-    this.door.x = 1350;
-    this.door.y = GAME_HEIGHT - 610 ; // Position on top of the last step
+    // Make door visible first - position it dynamically on top of last platform
+    this.door.x = 1400; // Same X as last platform
+    this.door.y = this.doorY; // Calculated in createPlatforms
 
     // Create spike graphics for top boundary (death zone)
     this.spikes = this.add.graphics();
@@ -102,14 +102,21 @@ export class Level6Scene extends BaseScene {
 
     // Step 6 & 7 - Static steps (don't move, door is here)
     this.createPlatform(1280, 600, 200, 940);
-    this.createPlatform(1480, 600, 200, 940);
+    const lastPlatformY = 600;
+    const lastPlatformHeight = 940;
+    this.createPlatform(1480, lastPlatformY, 200, lastPlatformHeight);
+
+    // Calculate door position on top of last platform
+    // Platform center Y = lastPlatformY, height = lastPlatformHeight
+    // Top of platform = center - (height / 2)
+    this.doorY = lastPlatformY - (lastPlatformHeight / 2);
 
     // Store moving steps in an array for easy iteration
     this.movingSteps = [this.step1, this.step2, this.step3, this.step4, this.step5];
   }
 
-  update() {
-    // Override jump power for this level
+  update(time, delta) {  
+     // Override jump power for this level
     if (!this.levelComplete) {
       const speed = 250;
       const jumpPower = -430; // Increased jump power for this level
@@ -202,6 +209,8 @@ export class Level6Scene extends BaseScene {
     // Move steps upward when activated
     this.movingSteps.forEach((step) => {
       if (step.moving) {
+        // Frame-rate independent step movement
+        // Keep original tested speed: 2 pixels per frame at 120fps
         const stepSpeed = 2;
 
         // Update step position
