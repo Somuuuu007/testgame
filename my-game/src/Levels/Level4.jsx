@@ -21,11 +21,25 @@ export class Level4Scene extends BaseScene {
   create() {
     super.create();
 
+    // Check if this is the first time entering Level 4
+    const currentLevel = localStorage.getItem('currentLevel');
+    const wasInLevel4 = localStorage.getItem('wasInLevel4');
+
+    // If entering Level 4 for the first time, reset death count
+    if (currentLevel === 'Level4' && wasInLevel4 !== 'true') {
+      localStorage.setItem('level4Deaths', '0');
+      localStorage.setItem('wasInLevel4', 'true');
+    }
+
     // Get death count from localStorage for this level
     const deathCount = parseInt(localStorage.getItem('level4Deaths') || '0');
 
-    // Controls are reversed on first attempt (deathCount = 0), normal on second (deathCount = 1), reversed again, etc.
-    this.controlsReversed = (deathCount % 2 === 0);
+    // Pattern: Attempts 1-2 reversed, 3 normal, 4-5 reversed, 6 normal, repeat...
+    // Calculate position in pattern (0-5 cycle)
+    const patternPosition = deathCount % 6;
+    // Reversed for positions 0,1 (attempts 1,2) and 3,4 (attempts 4,5)
+    // Normal for positions 2 (attempt 3) and 5 (attempt 6)
+    this.controlsReversed = (patternPosition === 0 || patternPosition === 1 || patternPosition === 3 || patternPosition === 4);
 
     // Create spike graphics for left boundary (death zone)
     this.spikes = this.add.graphics();
