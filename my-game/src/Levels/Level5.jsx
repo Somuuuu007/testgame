@@ -200,7 +200,9 @@ export class Level5Scene extends BaseScene {
 
       // Move spikes toward center when game flips
       if (this.spikesMoving) {
-        const spikeSpeed = 3;
+        // Dynamic spike speed based on screen width (percentage-based)
+        // For reference device (1530px), speed was 3, so ~0.2% of width per frame
+        const spikeSpeed = GAME_WIDTH * 0.002;
 
         // Move left spikes to the right
         this.leftSpikeX += spikeSpeed;
