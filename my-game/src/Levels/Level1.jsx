@@ -84,7 +84,7 @@ export class Level1Scene extends BaseScene {
     // Save next level to localStorage
     localStorage.setItem('currentLevel', 'Level4');
     // Go to Level 4 (skipping Level 2 and 3)
-    this.scene.start("Level4");
+    this.scene.start("Level2");
   }
 }
 
