@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Phaser from "phaser";
 import { Level1Scene } from "./Level1";
+import { Level2Scene } from "./Level2";
 import { Level4Scene } from "./Level4";
 import { Level5Scene } from "./Level5";
 import { Level6Scene } from "./Level6";
@@ -45,15 +46,7 @@ const Game = () => {
           },
         },
         scene: [
-          Level1Scene, Level4Scene,
-          Level5Scene, Level6Scene,
-          Level7Scene, Level8Scene,
-          Level9Scene, Level10Scene,
-          Level11Scene, Level12Scene,
-          Level13Scene, Level14Scene,
-          Level15Scene, Level16Scene,
-          Level17Scene, Level18Scene,
-          Level19Scene, Level20Scene,
+          Level2Scene
         ],
       };
 
