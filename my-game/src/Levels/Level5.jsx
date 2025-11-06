@@ -161,8 +161,8 @@ export class Level5Scene extends BaseScene {
         // Start moving spikes toward center
         this.spikesMoving = true;
 
-        // Reposition door to center after flip
-        this.time.delayedCall(500, () => {
+        // Reposition door to center after flip - reduced delay for faster appearance
+        this.time.delayedCall(150, () => {
           this.door.x = GAME_WIDTH / 2; // Center of the screen
           this.door.y = GAME_HEIGHT - 80; // Top of the ground platform when flipped
           this.door.setVisible(true);
