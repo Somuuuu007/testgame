@@ -46,7 +46,7 @@ const Game = () => {
             debug: false,
           },
         },
-        scene: [ Level19Scene],
+        scene: [ Level20Scene],
       };
 
       game = new Phaser.Game(config);

@@ -9,7 +9,7 @@ export class Level20Scene extends BaseScene {
     this.backgroundKey = "background20";
     this.groundPlatformHeight = 80; // Smaller height for this level
     this.platformColor = 0x212121; // Dark color for this level
-    this.levelWidth = GAME_WIDTH; // Single screen width for this level
+    this.levelWidth = 1530; // Fixed level width with scrolling camera
     this.leftPlatformHeight = 250;
     this.doorX = 100; // Door on the left side
     // Door Y position: top of left platform (screen height - ground platform - left platform height)
@@ -26,8 +26,8 @@ export class Level20Scene extends BaseScene {
   create() {
     super.create();
 
-    // Move player to the right side
-    this.player.x = GAME_WIDTH - 250;
+    // Move player to the right side (using fixed level width)
+    this.player.x = this.levelWidth - 250;
     this.player.y = GAME_HEIGHT - 130;
 
     // Reposition door above the left platform
@@ -141,7 +141,7 @@ export class Level20Scene extends BaseScene {
 
     // Calculate target position (attach to left side of right platform)
     const platformWidth = 200;
-    const rightPlatformX = GAME_WIDTH - platformWidth / 2;
+    const rightPlatformX = this.levelWidth - platformWidth / 2;
     const targetX = rightPlatformX - platformWidth; // Position at left side of right platform
 
     // Store original position for spike movement
@@ -241,9 +241,9 @@ export class Level20Scene extends BaseScene {
     const platformWidth = 200;
     const platformHeight = 70;
 
-    // Create platform on the right side, connected to the ground
+    // Create platform on the right side, connected to the ground (using fixed level width)
     this.rightPlatform = this.createPlatform(
-      GAME_WIDTH - platformWidth / 2,
+      this.levelWidth - platformWidth / 2,
       GAME_HEIGHT - this.groundPlatformHeight - platformHeight / 2,
       platformWidth,
       platformHeight
@@ -252,7 +252,7 @@ export class Level20Scene extends BaseScene {
     // Second platform to the left of the first platform
     const gap = 200; // Distance between platforms
     const secondPlatformHeight = platformHeight + 30; // Reduced height
-    const secondPlatformX = GAME_WIDTH - platformWidth / 2 - platformWidth - gap;
+    const secondPlatformX = this.levelWidth - platformWidth / 2 - platformWidth - gap;
     const secondPlatformY = GAME_HEIGHT - this.groundPlatformHeight - secondPlatformHeight / 2;
 
     this.secondPlatform = this.createPlatform(
