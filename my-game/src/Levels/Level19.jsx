@@ -312,7 +312,8 @@ export class Level19Scene extends BaseScene {
     }
 
     // Platform to the left of right bottom platform (this is the main spike platform that will move)
-    const middlePlatformX = GAME_WIDTH - platformWidth / 2 - platformWidth - 400;
+    // Using percentages for responsive positioning
+    const middlePlatformX = GAME_WIDTH * 0.45; // ~52% from left (center-ish)
     const middlePlatformY = GAME_HEIGHT - platformHeight / 2 - 50;
     const middlePlatformWidth = platformWidth - 50;
     const middlePlatformHeight = platformHeight - 20;
