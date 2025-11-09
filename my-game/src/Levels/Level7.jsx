@@ -24,7 +24,7 @@ export class Level7Scene extends BaseScene {
     super.create();
 
     // Adjust player spawn position - lower to avoid top spikes
-    this.player.y = GAME_HEIGHT - 650;
+    this.player.y = GAME_HEIGHT - 630;
 
     // Make door visible first - position it on screen
     this.door.x = 1200;
